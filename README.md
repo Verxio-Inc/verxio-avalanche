@@ -1,40 +1,39 @@
+# Verxio: Unleash Your Creative Potential in the Decentralized Web3 Ecosystem
+
+**Verxio** empowers talents through a decentralized Web3 ecosystem, ensuring fair monetization for creative endeavors and contributions.
+
+## Explore Verxio's Three Pillars:
+
+### Verxio Earn
+Embark on a journey into the future of work, creating opportunities for all.
+
+### Verxio Learn
+Discover a decentralized learning platform that transforms skill development.
+
+### Verxio DAO
+Join a decentralized autonomous organization committed to enhancing community engagement and fostering growth.
+
+## Built on Juno: Unleashing the Power of Web3
+
+- **Authentication:** Leverage Juno authentication for seamless user logins and logouts within the Verxio dApp.
+- **Storage:** Utilize Juno Storage to host user documents, resumes, and profile photos, creating a secure environment on Verxio.
+- **Data Infrastructure:** Empower Verxio's backend with Juno Datastore, managing job opportunities, proposals, project contracts, and more.
+
+## Next Steps: Evolving for You
+
+- **Smart Contracts:** Verxio's ecosystem smart contracts are ready, with ongoing development focusing on the Verxio DAO frontend.
+- **Community Involvement:** Verxio DAO will soon enable users to submit proposals, share ideas, and vote on community initiatives.
+- **Skill Enhancement:** Verxio Learn empowers users to enhance their skills, positioning them for lucrative opportunities.
+- **Integration Ahead:** Plans include integrating Juno DAO and Juno Payment, streamlining talent payments within the Verxio ecosystem.
+
 ## Getting Started
 
-Create a project using this example:
+First, run the development server:
 
 ```bash
-npx thirdweb create --template next-javascript-starter
+npm run dev
 ```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-On `pages/_app.js`, you'll find our `ThirdwebProvider` wrapping your app, this is necessary for our [hooks](https://portal.thirdweb.com/react) and
-[UI Components](https://portal.thirdweb.com/ui-components) to work.
 
-## Environment Variables
-
-To run this project, you will need to add environment variables. Check the `.env.example` file for all the environment variables required and add it to `.env.local` file or set them up on your hosting provider.
-
-## Deploy to IPFS
-
-Deploy a copy of your application to IPFS using the following command:
-
-```bash
-yarn deploy
-```
-
-## Learn More
-
-To learn more about thirdweb and Next.js, take a look at the following resources:
-
-- [thirdweb React Documentation](https://docs.thirdweb.com/react) - learn about our React SDK.
-- [thirdweb JavaScript Documentation](https://docs.thirdweb.com/react) - learn about our JavaScript/TypeScript SDK.
-- [thirdweb Portal](https://docs.thirdweb.com/react) - check our guides and development resources.
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Templates](https://thirdweb.com/templates)
-
-You can check out [the thirdweb GitHub organization](https://github.com/thirdweb-dev) - your feedback and contributions are welcome!
-
-## Join our Discord!
-
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
