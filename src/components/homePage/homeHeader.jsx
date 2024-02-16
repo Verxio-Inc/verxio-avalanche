@@ -11,17 +11,19 @@ import { useRouter } from "next/navigation";
 import Button from "../Button";
 import { Logo } from "../atoms";
 import {  toast } from "react-toastify";
+import { ButtonConnect } from "../../components/connectButton"
+import { useAccount } from 'wagmi'
 
 
 const HomeHeader = () => {
+
+  const { address, isConnected } = useAccount()
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.persistedReducer.user.userValue);
   const userProfile = useSelector(
     (state) => state.persistedReducer.user.userProfile
   );
-  // const throttledFetchData = throttle((key) => fetchData(key), 1000);
-  // const throttledUnsubscribe = throttle((key) => unsubscribe, 1000);
 
   const [user2, setUser2] = useState(null);
 
@@ -29,20 +31,8 @@ const HomeHeader = () => {
   console.log("userProfile", userProfile);
   console.log("user2", user2);
 
-  useEffect(() => {
-    const initializeJuno = async () => {
-      try {
-        await initJuno({
-          satelliteId: "tw7oh-ryaaa-aaaal-adoya-cai",
-        });
-      } catch (error) {
-        console.error("Error initializing Juno:", error);
-        // Handle the error, e.g., show a user-friendly message or redirect to an error page.
-      }
-    };
+  console.log("Account detail", address)
 
-    initializeJuno();
-  }, []);
 
   const fetchData = async (value) => {
     try {
@@ -69,23 +59,24 @@ const HomeHeader = () => {
       console.log("Error occurred while fetching data:", error);
     }
   };
-
-  const handleLogin = async () => {
-    if (user?.key && userProfile !== false) {
+  const login = async () => {
+    if (user?.address) {
+      // If user has address
+      if (userProfile !== null && userProfile !== false) {
+        // If userProfile is not null or false, navigate to dashboard
+        router.push("/dashboard");
+        toast.success("Login Successfull");
+      } else {
+        // If userProfile is null or false, navigate to dashboard/settings
+        toast.info("Pls create account");
+        router.push("/dashboard/settings");
+      }
+    } else {
+      // If no address, set user value and navigate to dashboard
+      dispatch(setUserValue({ address }));
       router.push("/dashboard");
-    } else if (!user?.key && !user2) {
-      signIn();
-      authSubscribe((userData) => {
-        if (userData) {
-          const { key, owner } = userData;
-          dispatch(setUserValue({ key, owner }));
-        }
-      });
     }
-    // fetchData(user?.key);
   };
-
-  // user?.key && fetchData(user?.key);
 
   return (
     <div className="flex justify-between  items-center w-full h-[100px] px-[45px] py-[40px]">
@@ -100,25 +91,17 @@ const HomeHeader = () => {
           <li>Contact us</li>
         </ul>
       </div>
-      {user?.key ? (
+      {isConnected ? (
         <Button
           name="enter app"
           onClick={() => {
-            // handleLogin();
-            fetchData(user?.key);
+            login();
           }}
           outline
           className="border-white text-[14px] text-white"
         />
       ) : (
-        <Button
-          name=" Get Started"
-          onClick={() => {
-            handleLogin();
-          }}
-          outline
-          className="border-white text-[14px] text-white"
-        />
+        <ButtonConnect />
       )}
     </div>
   );

@@ -8,6 +8,7 @@ import { useNav } from "../context/nav_context";
 import { NavigationItems } from "../lib/data/sideBarData";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutButton from "./logout";
+import { ButtonConnect } from "./connectButton"
 
 const Sidebar = () => {
   const { isOpen, toggleNav } = useNav();
@@ -49,6 +50,7 @@ const Sidebar = () => {
             </ul>
 
             {/* {user ? <LogoutButton /> : <LoginButton />} */}
+            <ButtonConnect />
             <LogoutButton />
 
             <button className="flex items-center mx-auto w-[80%] gap-3">

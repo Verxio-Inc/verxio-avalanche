@@ -15,23 +15,22 @@ const Page = () => {
   console.log("main", user);
 
   useEffect(() => {
-    if (!user?.key) {
+    if (!user?.address) {
       router.push("/");
     } else if (Object.keys(userProfile).length === 0) {
       router.push("/dashboard/settings");
     } else {
       router.push("/dashboard/earn");
     }
-  }, [user?.key, userProfile]);
+  }, [user?.address, userProfile]);
 
   if (
     !user ||
-    !user.key ||
+    !user.address ||
     !userProfile ||
-    // Object.keys(userProfile).length === 0
     userProfile === false
   ) {
-    return null; // Return nothing if redirection is required
+    return null; 
   }
 };
 

@@ -2,7 +2,7 @@
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   RainbowKitProvider,
-  getDefaultConfig
+  getDefaultConfig, lightTheme,
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
@@ -28,13 +28,13 @@ const WagmiProviders = ({ children }) => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
          <RainbowKitProvider
-          // theme={lightTheme({
-          //   accentColor: "#1570ef",
-          //   accentColorForeground: "white",
-          //   borderRadius: "small",
-          //   fontStack: "system",
-          //   overlayBlur: "small",
-          // })}
+          theme={lightTheme({
+            accentColor: "#1570ef",
+            accentColorForeground: "white",
+            borderRadius: "small",
+            fontStack: "system",
+            overlayBlur: "small",
+          })}
           // chains={chains}
         >
           {children}

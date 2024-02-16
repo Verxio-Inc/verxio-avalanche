@@ -3,6 +3,7 @@ import { signOut } from "@junobuild/core-peer";
 import Image from "next/image";
 import SignOut from "../assets/SignOut.svg";
 import { useDispatch } from "react-redux";
+import { useDisconnect } from 'wagmi'
 import {
   setUserValue,
   setUserProfile,
@@ -12,11 +13,13 @@ import {
 import { useRouter } from "next/navigation";
 
 const LogoutButton = () => {
+  const { disconnect } = useDisconnect()
   const dispatch = useDispatch();
   const router = useRouter();
 
   const handleLogout = () => {
-    signOut();
+    // signOut();
+    disconnect()
     // dispatch(setUserValue({}));
     // dispatch(setUserProfile({}));
     // dispatch(setEditUser(false));
