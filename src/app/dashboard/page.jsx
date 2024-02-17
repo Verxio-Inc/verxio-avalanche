@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserProfile } from "../../../slices/userSlices";
+import {  toast } from "react-toastify";
 
 const Page = () => {
   const user = useSelector((state) => state.persistedReducer.user.userValue);
@@ -18,6 +19,7 @@ const Page = () => {
     if (!user?.address) {
       router.push("/");
     } else if (Object.keys(userProfile).length === 0) {
+      toast.info("Pls create account");
       router.push("/dashboard/settings");
     } else {
       router.push("/dashboard/earn");

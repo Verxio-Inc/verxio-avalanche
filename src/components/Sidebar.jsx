@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-import { initJuno, authSubscribe } from "@junobuild/core-peer";
 import { Logo, SidebarMenuItem } from "./atoms";
 import Image from "next/image";
 import AxiosLogo from "../assets/AxiosLogo.svg";
@@ -15,20 +14,6 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.persistedReducer.user.userProfile);
 
-  useEffect(() => {
-    const initializeJuno = async () => {
-      try {
-        await initJuno({
-          satelliteId: "tw7oh-ryaaa-aaaal-adoya-cai",
-        });
-      } catch (error) {
-        console.error("Error initializing Juno:", error);
-        // Handle the error, e.g., show a user-friendly message or redirect to an error page.
-      }
-    };
-
-    initializeJuno();
-  }, []);
 
   return (
     <>
@@ -48,9 +33,7 @@ const Sidebar = () => {
                 <SidebarMenuItem key={`sidebar-item-${index}`} {...item} />
               ))}
             </ul>
-
-            {/* {user ? <LogoutButton /> : <LoginButton />} */}
-            <ButtonConnect />
+            {/* <ButtonConnect /> */}
             <LogoutButton />
 
             <button className="flex items-center mx-auto w-[80%] gap-3">

@@ -5,24 +5,22 @@ import {
   getDefaultConfig, lightTheme,
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+
 import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  base,
+  avalancheFuji
 } from 'wagmi/chains';
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-// import { PegasusTestnet } from "./Chain";
 
 const config = getDefaultConfig({
   appName: 'Verxio | Decentralizing the future of work!',
   projectId: '274de4271228fdd69013c56274f0e688',
-  chains: [mainnet, polygon, optimism, arbitrum, base],
+  chains: [avalancheFuji],
   ssr: true
 });
 
 const queryClient = new QueryClient();
+
 const WagmiProviders = ({ children }) => {
   return (
     <WagmiProvider config={config}>
@@ -35,9 +33,13 @@ const WagmiProviders = ({ children }) => {
             fontStack: "system",
             overlayBlur: "small",
           })}
-          // chains={chains}
         >
+          <ThirdwebProvider 
+          clientId="f5888353ab056968602a49dda7537ef3" 
+          activeChain="avalanche-fuji"
+          >
           {children}
+          </ThirdwebProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

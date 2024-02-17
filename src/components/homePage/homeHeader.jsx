@@ -68,8 +68,9 @@ const HomeHeader = () => {
         toast.success("Login Successfull");
       } else {
         // If userProfile is null or false, navigate to dashboard/settings
-        toast.info("Pls create account");
+        
         router.push("/dashboard/settings");
+        toast.info("Pls create account");
       }
     } else {
       // If no address, set user value and navigate to dashboard
