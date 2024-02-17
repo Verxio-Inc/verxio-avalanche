@@ -2,7 +2,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import ReduxProvider from "../components/reduxProvider";
-import JunoProvider from "../components/junoProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import WagmiProviders from "../components/wagmiProviders";
@@ -24,9 +23,7 @@ export default async function RootLayout({ children }) {
       <body className={`${inter.variable} font-inter`}>
         <AppRouterCacheProvider>
         <WagmiProviders>
-          <JunoProvider>
             <ReduxProvider>{children}</ReduxProvider>
-          </JunoProvider>
           </WagmiProviders>
         </AppRouterCacheProvider>
         <ToastContainer/>

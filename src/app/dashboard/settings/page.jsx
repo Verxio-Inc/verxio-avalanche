@@ -1,17 +1,16 @@
 "use client";
 import { useEffect, useState, React, useRef } from "react";
-import { initJuno } from "@junobuild/core-peer";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Button from "../../../components/Button";
 import Edit from "../../../assets/edit.svg";
 import * as Yup from "yup";
-import { uploadFile, setDoc } from "@junobuild/core-peer";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
-import { root } from "../../../../store";
 import { setEditUser, setUserProfile } from "../../../../slices/userSlices";
 import Link from "next/link";
 import {  toast } from "react-toastify";
+import { useStorageUpload } from "@thirdweb-dev/react";
+
 const Page = () => {
   const user = useSelector((state) => state.persistedReducer.user.userValue);
   const userProfile = useSelector(
@@ -27,20 +26,6 @@ const Page = () => {
   );
 
   const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    const initializeJuno = async () => {
-      try {
-        await initJuno({
-          satelliteId: "tw7oh-ryaaa-aaaal-adoya-cai",
-        });
-      } catch (error) {
-        console.error("Error initializing Juno:", error);
-      }
-    };
-
-    initializeJuno();
-  }, []);
 
   const handleImageChange = (event) => {
     const file = event.currentTarget.files[0];
@@ -61,7 +46,8 @@ const Page = () => {
   const handleUploadButtonClick = () => {
     fileInputRef.current.click();
   };
-
+  const { mutateAsync: upload } = useStorageUpload();
+  
   const initialValues = {
     firstName: userProfile?.firstName || "",
     lastName: userProfile?.lastName || "",
@@ -86,48 +72,40 @@ const Page = () => {
 
   const submitValue = async (values) => {
     console.log(typeof values.fileDoc);
-
     setLoading(true);
     {
-      let url;
-      let ImageUrl;
+      // let fileUrl;
+      // let ImageUrl;
 
       try {
-        // Handle file upload logic
-        if (typeof values.fileDoc == "object") {
-          const filename = `${user.key}-${values.fileDoc.name}`;
-          console.log("Uploading file document...")
-          const { downloadUrl } = await uploadFile({
-            collection: "userProfile-document",
-            data: values.fileDoc,
-            filename,
-          });
-          url = downloadUrl;
-        }
+      //   // Handle file upload logic
+      //   if (typeof values.fileDoc == "object") {
+      //     console.log("Uploading file document...")
+      //     fileUrl = await upload({ data: values.fileDoc });
+      //     console.log("Document File", fileUrl)
+      //   }
 
-        if (typeof profileImg === "object") {
-          const filename = `${user.key}-${profileImg.name}`;
-          console.log("Uploading profile image...")
-          const { downloadUrl } = await uploadFile({
-            collection: "userProfile-photo",
-            data: profileImg,
-            filename,
-          });
-          ImageUrl = downloadUrl;
-        }
+      //   if (typeof profileImg === "object") {
+      //     console.log("Uploading profile image...")
+      //     ImageUrl = await upload({ data: profileImg});
+      //     console.log("Profile Image File", ImageUrl)
+          
+      //   }
 
-        console.log(url, ImageUrl);
+      //   console.log(url, ImageUrl);
 
         const value = {
-          _id: user.owner,
+          _id: user.address,
           firstName: values.firstName,
           lastName: values.lastName,
           bio: values.bio,
           email: values.email,
           phoneNumber: values.phoneNumber,
           website: values.website,
-          powUrl: url || userProfile?.powUrl,
-          profilePicUrl: ImageUrl || userProfile?.profilePicUrl,
+          powUrl: "www.testurl.com",
+          profilePicUrl: "www.testurl.com"
+          // powUrl: fileUrl || userProfile?.powUrl,
+          // profilePicUrl: ImageUrl || userProfile?.profilePicUrl,
         };
 
         console.log(value);
