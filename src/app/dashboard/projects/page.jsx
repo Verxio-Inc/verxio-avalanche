@@ -2,29 +2,28 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../../components/Button";
 import ProjectCard from "../../../components/projectCard";
-import { listDocs } from "@junobuild/core-peer";
 import { useSelector } from "react-redux";
 
 const Page = () => {
   const [projects, setProjects] = useState([]);
 
   const user = useSelector((state) => state.persistedReducer.user.userValue);
-  useEffect(() => {
-    const list = async () => {
-      try {
-        const { items } = await listDocs({
-          collection: "projects",
-        });
-        setProjects(items);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const list = async () => {
+  //     try {
+  //       const { items } = await listDocs({
+  //         collection: "projects",
+  //       });
+  //       setProjects(items);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    if (user) {
-      list();
-    }
-  }, [user]);
+  //   if (user) {
+  //     list();
+  //   }
+  // }, [user]);
 
   console.log(projects);
 

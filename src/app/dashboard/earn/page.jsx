@@ -3,7 +3,6 @@
 import JobCard from "../../../components/jobComponent/JobCard";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { listDocs } from "@junobuild/core-peer";
 
 const Page = () => {
   const [jobs, setJobs] = useState([]);
@@ -12,23 +11,23 @@ const Page = () => {
     (state) => state.persistedReducer.user.userProfile
   );
 
-  useEffect(() => {
-    const list = async () => {
-      try {
-        const { items } = await listDocs({
-          collection: "publish-task",
-        });
-        setJobs(items.reverse());
-        console.log(items)
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const list = async () => {
+  //     try {
+  //       const { items } = await listDocs({
+  //         collection: "publish-task",
+  //       });
+  //       setJobs(items.reverse());
+  //       console.log(items)
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    if (user) {
-      list();
-    }
-  }, [user]);
+  //   if (user) {
+  //     list();
+  //   }
+  // }, [user]);
 
   // console.log(user);
   // console.log(userProfile);

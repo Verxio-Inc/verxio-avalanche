@@ -14,7 +14,6 @@ import DescListCard from "./descListCard";
 import { useSelector } from "react-redux";
 import LikeButtons from "../likeButtons";
 import CommentButton from "../commentButton";
-import { setDoc } from "@junobuild/core-peer";
 import { CloseCircle } from "iconsax-react";
 import { toast } from "react-toastify";
 
@@ -55,13 +54,13 @@ const JobDescription = () => {
         console.log("Submission Data", submissionData);
         console.log("Submitting task proposal...");
 
-        await setDoc({
-          collection: "proposals",
-          doc: {
-            key: data.taskId,
-            data: submissionData,
-          },
-        });
+        // await setDoc({
+        //   collection: "proposals",
+        //   doc: {
+        //     key: data.taskId,
+        //     data: submissionData,
+        //   },
+        // });
 
         console.log("Submission successful");
         toast.success("Submission successful");
