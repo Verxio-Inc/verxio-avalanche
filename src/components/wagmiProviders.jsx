@@ -46,4 +46,4 @@ const WagmiProviders = ({ children }) => {
   );
 };
 
-export default WagmiProviders;q
+export default WagmiProviders;
