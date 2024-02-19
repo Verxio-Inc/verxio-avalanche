@@ -1,5 +1,4 @@
 import React from "react";
-import { signOut } from "@junobuild/core-peer";
 import Image from "next/image";
 import SignOut from "../assets/SignOut.svg";
 import { useDispatch } from "react-redux";
