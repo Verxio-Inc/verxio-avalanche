@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Button from "../../../components/Button";
 import SubmissionCard from "../../../components/submissionCard";
 import { useSelector } from "react-redux";
-import { listDocs, setDoc } from "@junobuild/core-peer";
 import { toast } from "react-toastify";
 
 const Page = () => {
@@ -15,29 +14,29 @@ const Page = () => {
 
   const user = useSelector((state) => state.persistedReducer.user.userValue);
 
-  useEffect(() => {
-    const list = async () => {
-      try {
-        const { items } = await listDocs({
-          collection: "proposals",
-        });
+  // useEffect(() => {
+  //   const list = async () => {
+  //     try {
+  //       const { items } = await listDocs({
+  //         collection: "proposals",
+  //       });
 
-        const allSubmission = items.map((item) => {
-          return {
-            ...item.data,
-            dateSubmitted: item.created_at,
-          };
-        });
-        setSubmissions(allSubmission);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  //       const allSubmission = items.map((item) => {
+  //         return {
+  //           ...item.data,
+  //           dateSubmitted: item.created_at,
+  //         };
+  //       });
+  //       setSubmissions(allSubmission);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    if (user) {
-      list();
-    }
-  }, [user]);
+  //   if (user) {
+  //     list();
+  //   }
+  // }, [user]);
 
   console.log("Task Submissions", submissions);
 
@@ -65,13 +64,13 @@ const Page = () => {
         const documentKey = "your_document_key";
 
         console.log("Assigning task...");
-        await setDoc({
-          collection: "projects",
-          doc: {
-            key: documentKey,
-            data: assignees,
-          },
-        });
+        // await setDoc({
+        //   collection: "projects",
+        //   doc: {
+        //     key: documentKey,
+        //     data: assignees,
+        //   },
+        // });
         console.log("Project assignment done.");
         toast.success('Assignment successfull')
       } else {

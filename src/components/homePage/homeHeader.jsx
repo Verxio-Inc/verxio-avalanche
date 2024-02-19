@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { signIn, authSubscribe, initJuno } from "@junobuild/core-peer";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setEditUser,

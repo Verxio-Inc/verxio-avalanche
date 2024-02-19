@@ -2,7 +2,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Button from "../../../components/Button";
 import * as Yup from "yup";
-import { uploadFile, setDoc } from "@junobuild/core-peer";
 import { nanoid } from "nanoid";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -56,36 +55,36 @@ const Page = () => {
         // Handle file upload logic
         if (values.fileDoc !== undefined) {
           const filename = `${user.key}-${values.fileDoc.name}`;
-          const { downloadUrl } = await uploadFile({
-            collection: "publish-document",
-            data: values.fileDoc,
-            filename,
-          });
-          url = downloadUrl;
+          // const { downloadUrl } = await uploadFile({
+          //   collection: "publish-document",
+          //   data: values.fileDoc,
+          //   filename,
+          // });
+          // url = downloadUrl;
         }
 
         // Access the download URL and other form values here
         console.log("upload successful!...");
         console.log("Download URL:", url);
 
-        await setDoc({
-          collection: "publish-task",
-          doc: {
-            key: nanoid(),
-            data: {
-              title: values.title,
-              description: values.description,
-              responsibilities: values.responsibilities,
-              requirements: values.requirements,
-              rewardStructure: values.reward,
-              jobType: values.jobType,
-              paymentMethod: values.paymentMethod,
-              totalPeople: values.totalPeople,
-              amount: values.amount,
-              ...(url !== undefined && { url }),
-            },
-          },
-        });
+        // await setDoc({
+        //   collection: "publish-task",
+        //   doc: {
+        //     key: nanoid(),
+        //     data: {
+        //       title: values.title,
+        //       description: values.description,
+        //       responsibilities: values.responsibilities,
+        //       requirements: values.requirements,
+        //       rewardStructure: values.reward,
+        //       jobType: values.jobType,
+        //       paymentMethod: values.paymentMethod,
+        //       totalPeople: values.totalPeople,
+        //       amount: values.amount,
+        //       ...(url !== undefined && { url }),
+        //     },
+        //   },
+        // });
 
         // console.log("Task upload successful!...");
         toast.success("Task uploaded successfully.");
