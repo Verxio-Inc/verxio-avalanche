@@ -3,6 +3,8 @@
 import JobCard from "../../../components/jobComponent/JobCard";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useReadContract } from "wagmi";
+import  { VerxioCreateTask } from '../../../components/abi/verxioTask.json'
 
 const Page = () => {
   const [jobs, setJobs] = useState([]);
@@ -11,26 +13,16 @@ const Page = () => {
     (state) => state.persistedReducer.user.userProfile
   );
 
-  // useEffect(() => {
-  //   const list = async () => {
-  //     try {
-  //       const { items } = await listDocs({
-  //         collection: "publish-task",
-  //       });
-  //       setJobs(items.reverse());
-  //       console.log(items)
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   if (user) {
-  //     list();
-  //   }
-  // }, [user]);
-
   // console.log(user);
   // console.log(userProfile);
+
+  const { data } = useReadContract({
+    address: "0x4c321A088EC43F5C9e246e4894798C7c77deb1e6",
+    abi: VerxioCreateTask,
+    functionName: "getAllTasks",
+  });
+
+  console.log("data", data)
 
   return (
     <div className="border p-[32px] rounded-2xl">
@@ -38,7 +30,7 @@ const Page = () => {
         Welcome back {userProfile?.firstName}
         {/* Welcome back */}
       </h2>
-      {jobs?.map((item) => (
+      {data?.map((item) => (
         <JobCard key={item.key} jobs={item} />
       ))}
     </div>

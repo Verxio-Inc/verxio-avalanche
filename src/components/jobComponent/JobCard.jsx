@@ -20,8 +20,8 @@ const JobCard = ({ jobs }) => {
 
   const data = {
     ...jobs.data,
-    taskId: jobs.key,
-    owner: jobs.owner,
+    // taskId: jobs.key,
+    // owner: jobs.owner,
     ownerFirstName: ownerDetails?.firstName,
     ownerLastName: ownerDetails?.lastName,
     ownerBio: ownerDetails?.bio,
@@ -41,12 +41,12 @@ const JobCard = ({ jobs }) => {
   }
     // return null
   };
-
+cosnole.log
   useEffect(() => {
     const fetchOwnerDetails = async () => {
       try {
         const response = await fetch(
-          `https://verxio-backend.vercel.app/api/v1/profiles/${jobs.owner}`
+          `https://verxio-backend.vercel.app/api/v1/profiles/${jobs.jobPoster}`
         );
         const ownerData = await response.json();
         setOwnerDetails(ownerData.user);
@@ -56,7 +56,7 @@ const JobCard = ({ jobs }) => {
     };
 
     fetchOwnerDetails();
-  }, [jobs.owner]);
+  }, [jobs.jobPoster]);
 
   return (
     <div className="bg-[#FFFFFF] px-[32px] py-[24px] rounded-2xl shadow mb-[34px]">

@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import Button from "../../../components/Button";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
+import { useSimulateContract, useWriteContract } from 'wagmi'
+import  { VerxioCreateTask } from '../../../components/abi/verxioTask.json'
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useState } from "react";
@@ -48,49 +50,39 @@ const Page = () => {
 
   const submitValue = async (values) => {
     setLoading(true);
+
+    const config = useSimulateContract({
+      VerxioCreateTask,
+      address: '0x4c321A088EC43F5C9e246e4894798C7c77deb1e6',
+      functionName: 'submitTask',
+      args: [
+        values.title,
+        values.description,
+        'filedocurl.com',
+        values.totalPeople,
+        values.amount,
+        values.jobType,
+        values.paymentMethod,
+        values.responsibilities,
+        values.requirements,
+        values.reward,
+      ],
+    })
+
+    const {
+      data: taskData,
+      isLoading: isCreatingTask,
+      isSuccess: isTaskCreated,
+      write: submitTaskWrite,
+      isError: isCreatingTaskError,
+    } = useWriteContract(config);
+
     {
       console.log("Form values:", values);
-      let url;
       try {
-        // Handle file upload logic
-        if (values.fileDoc !== undefined) {
-          const filename = `${user.key}-${values.fileDoc.name}`;
-          // const { downloadUrl } = await uploadFile({
-          //   collection: "publish-document",
-          //   data: values.fileDoc,
-          //   filename,
-          // });
-          // url = downloadUrl;
-        }
-
-        // Access the download URL and other form values here
-        console.log("upload successful!...");
-        console.log("Download URL:", url);
-
-        // await setDoc({
-        //   collection: "publish-task",
-        //   doc: {
-        //     key: nanoid(),
-        //     data: {
-        //       title: values.title,
-        //       description: values.description,
-        //       responsibilities: values.responsibilities,
-        //       requirements: values.requirements,
-        //       rewardStructure: values.reward,
-        //       jobType: values.jobType,
-        //       paymentMethod: values.paymentMethod,
-        //       totalPeople: values.totalPeople,
-        //       amount: values.amount,
-        //       ...(url !== undefined && { url }),
-        //     },
-        //   },
-        // });
-
-        // console.log("Task upload successful!...");
-        toast.success("Task uploaded successfully.");
+        const transaction = submitTaskWrite();
+        toast.success("Task created successfully.");
         setLoading(false);
-
-        // Now you can perform additional submit logic, e.g., send data to the server
       } catch (error) {
         console.error("File Error:", error);
         toast.error('Task Upload Failed')
