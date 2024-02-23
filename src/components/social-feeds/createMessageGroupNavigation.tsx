@@ -5,7 +5,7 @@ const CreateMessageGroupNavigation = () => {
   return (
     <div className="h-[54px] w-full flex items-center gap-4">
       <div className="flex-[40%] pl-6 flex items-center gap-6">
-        <Link href={"/social-feeds"} className="cursor-pointer text-red-500">
+        <Link href={"/dashboard/social-feed"} className="cursor-pointer text-red-500">
           <Image
             src={"/images1/message.svg"}
             alt="profile picture"
@@ -14,7 +14,7 @@ const CreateMessageGroupNavigation = () => {
           />
         </Link>
 
-        <Link href={"/social-feeds/groups"} className="cursor-pointer">
+        <Link href={"/dashboard/social-feed/groups"} className="cursor-pointer">
           <Image
             src={"/images1/addmessage.svg"}
             alt="profile picture"
@@ -23,7 +23,7 @@ const CreateMessageGroupNavigation = () => {
           />
         </Link>
 
-        <Link href={"/social-feeds/create-groups"} className="cursor-pointer">
+        <Link href={"/dashboard/social-feed/create-groups"} className="cursor-pointer">
           <Image
             src={"/images1/user.svg"}
             alt="profile picture"
