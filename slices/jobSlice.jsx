@@ -5,7 +5,7 @@ const initialState = {
   jobDetails: {},
 };
 
-const JobSlice = createSlice({
+const JobSlice = createSlice({ 
   name: "jobSlice",
   initialState,
   reducers: {
