@@ -123,55 +123,14 @@ const JobDescription = () => {
     }
   };
   const downVote = async (id) => {
-    try {
-      const response = await fetch(
-        `https://verxio-backend.vercel.app/api/v1/posts/downvotes/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `Failed to upvote post: ${response.status} ${response.statusText}`
-        );
-      }
-
-      console.log("Post upvoted successfully!");
-      getVotes(data.taskId);
-
-      // Optionally update UI here
-    } catch (error) {
-      console.error("Error upvoting post:", error.message);
-      // Display error message to the user or handle it in another appropriate way
-    }
+      console.log("Post upvoted successfully!") 
   };
 
   const getVotes = async (id) => {
-    try {
-      const response = await fetch(
-        `https://verxio-backend.vercel.app/api/v1/posts/${id}`
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `Failed to upvote post: ${response.status} ${response.statusText}`
-        );
-      }
 
       console.log("Post upvoted successfully!");
-      const data = await response.json();
-
-      setUpVoteValue(data?.contract?.upvotes)
-      setDownVoteValue(data?.contract?.downvotes)
-      console.log(data)
-    } catch (error) {
-      console.error("Error upvoting post:", error.message);
-      // Display error message to the user or handle it in another appropriate way
-    }
+      // setUpVoteValue(data?.contract?.upvotes)
+      // setDownVoteValue(data?.contract?.downvotes)
   };
 
   return (
@@ -186,7 +145,7 @@ const JobDescription = () => {
               <div className="flex flex-col">
                 <p className="text-[#020202] text-[18px] font-semibold capitalize">
                   {/* Trail Bitz Company */}
-                  {data?.title}
+                  {data?.jobTitle}
                 </p>
                 <p className="font-normal text-[14px] text-[#424242]">
                   {data.ownerBio}
@@ -194,28 +153,28 @@ const JobDescription = () => {
               </div>
             </div>
             <div className="flex border rounded-lg px-4 py-2 border-[#B6B8EC] items-center gap-2">
-              <p className="text-[14px] font-medium mt-1">{data.amount}</p>
+              <p className="text-[14px] font-medium mt-1">{data.prizepoolAmount.toString()}</p>
               {/* <span className="text-[8px] mr-1">$300</span> */}
               <Image
                 alt="Ethereum"
-                src={logo(data.paymentMethod)}
+                src={logo(data.paymentToken)}
                 className="w-[20px]"
               />
             </div>
           </div>
           <div className=" flex gap-[24px] mt-[22px] items-center">
-            <LikeButtons upVote={upVote} id={data.taskId} upVoteValue={upVoteValue} downVote={downVote} downVoteValue={downVoteValue} />
+            <LikeButtons upVote={upVote} id={data.taskId.toString()} upVoteValue={upVoteValue} downVote={downVote} downVoteValue={downVoteValue} />
             <CommentButton />
           </div>
         </div>
         <div className="border border-[#B6B8EC bg-[#FFFFFF] shadow rounded-2xl p-[30px]">
-          <DescListCard label="Job Description" value={data.description} />
+          <DescListCard label="Job Description" value={data.jobDescription} />
           <DescListCard
             label="responsibilities"
-            value={data.responsibilities}
+            value={data.jobResponsibilities}
           />
-          <DescListCard label="requirements" value={data.requirements} />
-          <DescListCard label="reward pool" value={data.rewardStructure} />
+          <DescListCard label="requirements" value={data.jobRequirements} />
+          <DescListCard label="reward pool" value={data.jobRewardPool} />
         </div>
         <div className="flex gap-5 mt-[56px] justify-end">
           <Button outline name="Submissions" href="/dashboard/submissions" />

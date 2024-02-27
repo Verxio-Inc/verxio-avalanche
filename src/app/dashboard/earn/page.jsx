@@ -13,16 +13,16 @@ const Page = () => {
     (state) => state.persistedReducer.user.userProfile
   );
 
-  // console.log(user);
-  // console.log(userProfile);
-
   const { data } = useReadContract({
     address: "0x4c321A088EC43F5C9e246e4894798C7c77deb1e6",
     abi: VerxioCreateTask,
     functionName: "getAllTasks",
   });
 
-  console.log("data", data)
+  useEffect(() => {
+    setJobs(data);
+  }, [data]);
+
 
   return (
     <div className="border p-[32px] rounded-2xl">
@@ -30,7 +30,7 @@ const Page = () => {
         Welcome back {userProfile?.firstName}
         {/* Welcome back */}
       </h2>
-      {data?.map((item) => (
+      {jobs?.map((item) => (
         <JobCard key={item.key} jobs={item} />
       ))}
     </div>

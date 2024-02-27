@@ -17,16 +17,15 @@ const JobCard = ({ jobs }) => {
   const dispatch = useDispatch();
   const [ownerDetails, setOwnerDetails] = useState(null);
   // const { data } = jobs;
-
+  
   const data = {
-    ...jobs.data,
-    // taskId: jobs.key,
-    // owner: jobs.owner,
+    ...jobs,
     ownerFirstName: ownerDetails?.firstName,
     ownerLastName: ownerDetails?.lastName,
     ownerBio: ownerDetails?.bio,
   }
 
+console.log("Job Details", data)
   const logo = (coin) => {
     if (coin === "icp") {
       return ICP;
@@ -41,7 +40,7 @@ const JobCard = ({ jobs }) => {
   }
     // return null
   };
-cosnole.log
+
   useEffect(() => {
     const fetchOwnerDetails = async () => {
       try {
@@ -55,7 +54,7 @@ cosnole.log
       }
     };
 
-    fetchOwnerDetails();
+    fetchOwnerDetails();      
   }, [jobs.jobPoster]);
 
   return (
@@ -67,13 +66,13 @@ cosnole.log
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-[#020202] text-[18px] font-semibold capitalize">
-              {data?.title}
+              {data?.jobTitle}
             </p>
             <p className="font-normal text-[14px] text-[#424242]">
               {data?.ownerFirstName} {data?.ownerLastName}
             </p>
             <p className="text-[#484851] font-normal text-[16px] truncate ... max-w-[400px]">
-              {data?.description}
+              {data?.jobDescription}
             </p>
           </div>
         </div>
@@ -88,11 +87,11 @@ cosnole.log
         </div>
         <div className="flex gap-[24px] items-center">
           <div className="flex border rounded-lg px-4 py-2 border-[#B6B8EC] items-center gap-2">
-            <p className="text-[14px] font-medium">{data?.amount}</p>
+            <p className="text-[14px] font-medium">{data?.prizepoolAmount}</p>
             {/* <span className="text-[8px] mr-1">$300</span> */}
             <Image
               alt="Ethereum"
-              src={logo(data.paymentMethod)}
+              src={logo(data.paymentToken)}
               className="w-[18px]"
             />
           </div>
